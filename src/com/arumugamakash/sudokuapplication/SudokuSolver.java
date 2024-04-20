@@ -29,7 +29,7 @@ public class SudokuSolver {
 	public static void inputNumber(int[][] board) {
 		int count = 0;
 		for (int i = 0; i < board.length; i++) {
-			for (int j = 0; j < board[i].length; j++) {
+			for (int j = 0; j < board[i].length;) {
 				if (board[i][j] == 0) {
 					int row = i;
 					int column = j;
@@ -39,12 +39,13 @@ public class SudokuSolver {
 					if (checkRow(board, input, row)) {
 						if (checkcolumn(board, input, column)) {
 							if (checkSubMatrix(board, input, row, column)) {
-								board[i][j] = input;
+								board[i][j++] = input;
+								System.out.println("count"+count);
 							} else {
 								count++;
 								System.out.println("Invalid Number 1");
 								if (count == 3) {
-									System.out.println("game Over");
+									System.out.println("Game Over");
 									System.exit(0);
 								}
 							}
@@ -52,22 +53,26 @@ public class SudokuSolver {
 							count++;
 							System.out.println("Invalid Number 2");
 							if (count == 3) {
-								System.out.println("game Over");
+								System.out.println("Game Over");
 								System.exit(0);
 							}
-							break;
+							//break;
 						}
 					} else {
 						count++;
 						System.out.println("Invalid Number 3");
 						if (count == 3) {
-							System.out.println("game Over");
+							System.out.println("Game Over");
 							System.exit(0);
 						}
-						break;
+						//break;
 					}
+				}else
+				{
+					j++;
 				}
 			}
+			count=0;
 		}
 		System.out.println();
 	}
